@@ -1,10 +1,83 @@
 $( document ).ready(function() {
-  var canvas1 = document.getElementById('Canvas1');
-  var context1 = canvas1.getContext('2d');
-  var canvas2 = document.getElementById('Canvas2');
-  var context2 = canvas2.getContext('2d');
+  var quiltCanvas = document.getElementById('quilt');
+  var quiltContext = quiltCanvas.getContext('2d');
+  
+  function writeMessage(message) {
+    text.setText(message);
+    layer.draw();
+  }
+  
+  function changeColor(shape) {
+    if (shape.colorIndex < rectColors.length-1){
+    	shape.colorIndex=shape.colorIndex+1;
+    } else {
+    	shape.colorIndex = 0;
+    }
+	shape.setFill(rectColors[shape.colorIndex]);
+	layer.draw();
+  }
+  
+  var rectColors = new Array('red','green','blue', 'purple', 'yellow');
+  var rectangles = new Array();
+  
+  var stage = new Kinetic.Stage({
+    container: 'container',
+    width: 300,
+    height: 300
+  });
 
-
+  var layer = new Kinetic.Layer();
+  var rect=0;
+  for (var row=0; row<300; row+=100) {
+	  for (var column=0; column<300; column +=100){
+	  	console.log("rectangle ",rect, row, column);
+	  	rectangles[rect] = new Kinetic.Rect({
+	        x: row,
+	        y: column,
+	        width: 100,
+	        height: 100,
+	        fill: rectColors[0],
+	        stroke: 'gray',
+	        strokeWidth: 1
+	      });
+		  rectangles[rect].colorIndex = 0;
+		  rect++;
+		  
+	  }
+  }	  
+	  
+  var text = new Kinetic.Text({
+    x: 10,
+    y: 10,
+    fontFamily: 'Calibri',
+    fontSize: 12,
+    text: '',
+    fill: 'black'
+  });
+  
+  
+  // Events
+  for (var rect=0; rect<9; rect++) {     
+  	rectangles[rect].on('click', function() {
+    	changeColor(this);
+	});
+  }  
+	  
+                  
+  // add the shapes to the layer
+  for (var rect=0; rect<9; rect++) {     
+  	layer.add(rectangles[rect]);
+  }
+  layer.add(text);
+	  
+  // add the layer to the stage
+  stage.add(layer);
+  
+  // This is the only way I could find to access the Kinetic Stage's canvas since the
+  // provided layer.getCanvas() method doesn't seem to work in this revision of
+  // KineticJS
+  var quiltBlock = document.getElementsByTagName('canvas')[0];
+  
   var imageObj1 = new Image();
   imageObj1.src = "images/aqua_gingham.png"
   imageObj1.onload = function() {
@@ -18,32 +91,18 @@ var imageObj2 = new Image();
    // context2.drawImage(imageObj2, 10, 10);
   };
   
-var imageData = context1.getImageData(0,0,300,300);
-  
-var pngUrl = canvas1.toDataURL();
-
 $("#quiltIt").click(function(e) {
 	e.preventDefault();
-	// alert("Quilt");
-	context2.drawImage(canvas1, 0, 0, 100,100);
-	context2.fontStyle = "38pt Arial";
-	context2.fillStyle = "red";
-	context2.fillText("Jackie", 0, 0);
-	// context2.putImageData(imageData, 0, 0);
+	// populate quilt gride
+	for (var row=0; row<500; row+=100) {
+	  for (var column=0; column<400; column +=100) {
+		  quiltContext.drawImage(quiltBlock, column, row, 100,100);
+	  }
+  }
+
+
 });
 
-    
-  
-
-/*
-
-  var imageObj3 = new Image();
-  imageObj3.src = '"'+pngUrl+'"';
-  console.log(pngUrl);
-  imageObj3.onload = function() {
-	  context2.drawImage(imageObj3, 0, 0);
-  }
-*/
-
+ 
 
 });
