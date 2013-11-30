@@ -14,20 +14,23 @@ p {
 	background:black;
 	font-family:arial;
 }
-
-label {
-	text-align: left;
-	font-family:arial;
+#gridA, #gridB {
 	
-}
-input {
-	float:right;
 	font-family:arial;
 }
 
 body {
 	font-family:arial;
+	background: #E6E6B8;
 
+}
+
+footer {
+	width:100%;
+	color:white;
+	background: black;
+	text-align: center;
+	font-size: small;
 }
 button {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #808000), color-stop(1, #e3e303));

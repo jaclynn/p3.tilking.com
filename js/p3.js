@@ -21,61 +21,79 @@ $( document ).ready(function() {
 	layer.draw();
   }
 
-  var rectangles = new Array();
-  
-  var stage = new Kinetic.Stage({
-    container: 'container',
-    width: 300,
-    height: 300
-  });
 
-  var layer = new Kinetic.Layer();
-  var rect=0;
-  for (var row=0; row<300; row+=100) {
-	  for (var column=0; column<300; column +=100){
-	  	console.log("rectangle ",rect, row, column);
-	  	rectangles[rect] = new Kinetic.Rect({
-	        x: row,
-	        y: column,
-	        width: 100,
-	        height: 100,
-	        fill: "#E6E6B8",
-	        stroke: 'gray',
-	        strokeWidth: 1
-	      });
-		  rectangles[rect].colorIndex = 0;
-		  rect++;
+  function createQuiltBlock(size) {
+  		  if (size==16){
+			  blockSize=400;
+		  } else if (size==9){
+		  	  blockSize=300;		 			  
+		  }
+	
+	      var stage = new Kinetic.Stage({
+		    container: 'container',
+		    width: blockSize,
+		    height: blockSize
+		  });
+		
+		  var layer = new Kinetic.Layer();
+  
+		  var rectangles = new Array();
 		  
-	  }
-  }	  
-	  
-  var text = new Kinetic.Text({
-    x: 10,
-    y: 10,
-    fontFamily: 'Calibri',
-    fontSize: 12,
-    text: '',
-    fill: 'black'
+		  var rect=0;
+		  // column/row max and for-loop maxes if 16-block choice
+		  for (var row=0; row<blockSize; row+=100) {
+			  for (var column=0; column<blockSize; column +=100){
+			  	console.log("rectangle ",rect, row, column);
+			  	rectangles[rect] = new Kinetic.Rect({
+			        x: row,
+			        y: column,
+			        width: 100,
+			        height: 100,
+			        fill: "#E6E6B8",
+			        stroke: 'gray',
+			        strokeWidth: 1
+			      });
+				  rectangles[rect].colorIndex = 0;
+				  rect++;
+				  
+			  }
+		  }	  
+			  
+		  var text = new Kinetic.Text({
+		    x: 10,
+		    y: 10,
+		    fontFamily: 'Calibri',
+		    fontSize: 12,
+		    text: '',
+		    fill: 'black'
+		  });
+		  
+		  
+		  // Events
+		  for (var rect=0; rect<size; rect++) {     
+		  	rectangles[rect].on('click', function() {
+		    	this.setFill(currentColor);
+		    	layer.draw();
+			});
+		  }  
+		                  
+		  // add the shapes to the layer
+		  for (var rect=0; rect<size; rect++) {     
+		  	layer.add(rectangles[rect]);
+		  }
+		  layer.add(text);
+			  
+		  // add the layer to the stage
+		  stage.add(layer);  
+  } // end functionCreateBlock
+  $('#grid9').click(function(e) {
+  	  e.preventDefault();
+	  createQuiltBlock(9);	  
   });
-  
-  
-  // Events
-  for (var rect=0; rect<9; rect++) {     
-  	rectangles[rect].on('click', function() {
-    	this.setFill(currentColor);
-    	layer.draw();
-	});
-  }  
-                  
-  // add the shapes to the layer
-  for (var rect=0; rect<9; rect++) {     
-  	layer.add(rectangles[rect]);
-  }
-  layer.add(text);
-	  
-  // add the layer to the stage
-  stage.add(layer);
-  
+  $('#grid16').click(function(e) {
+	 e.preventDefault();
+	 createQuiltBlock(16);
+  });
   $('#color1').colorPicker( { onColorChange : function(id, newValue) { 
   	console.log("ID: " + id + " has been changed to " + newValue);
   	currentColor = newValue;
@@ -106,7 +124,8 @@ $("#quiltIt").click(function(e) {
 	// populate quilt gride
 	for (var row=0; row<500; row+=100) {
 	  for (var column=0; column<400; column +=100) {
-		  quiltContext.drawImage(quiltBlock, column, row, 100,100);
+	  	  console.log("adding to quilt at", column, row);
+		  quiltContext.drawImage(quiltBlock,column,row,100,100);
 	  }
   }
 });
