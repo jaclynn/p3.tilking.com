@@ -4,7 +4,7 @@ $( document ).ready(function() {
 	var quiltContext = quiltCanvas.getContext('2d');
 	  
 	var rectColors = new Array('red','green','blue', 'purple', 'yellow');
-	var currentColor = "#DCDCDC";
+	var currentColor = "#333399";
 	  
   function writeMessage(message) {
     text.setText(message);
@@ -120,6 +120,8 @@ $( document ).ready(function() {
 //  };
   
 $("#quiltIt").click(function(e) {
+	console.log('quilt button clicked');
+	var quiltBlock = document.getElementsByTagName('canvas')[0];
 	e.preventDefault();
 	// populate quilt gride
 	for (var row=0; row<500; row+=100) {
