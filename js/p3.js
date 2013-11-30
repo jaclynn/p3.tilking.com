@@ -1,7 +1,11 @@
 $( document ).ready(function() {
-  var quiltCanvas = document.getElementById('quilt');
-  var quiltContext = quiltCanvas.getContext('2d');
-  
+	
+	var quiltCanvas = document.getElementById('quilt');
+	var quiltContext = quiltCanvas.getContext('2d');
+	  
+	var rectColors = new Array('red','green','blue', 'purple', 'yellow');
+	var currentColor = "#DCDCDC";
+	  
   function writeMessage(message) {
     text.setText(message);
     layer.draw();
@@ -16,8 +20,7 @@ $( document ).ready(function() {
 	shape.setFill(rectColors[shape.colorIndex]);
 	layer.draw();
   }
-  
-  var rectColors = new Array('red','green','blue', 'purple', 'yellow');
+
   var rectangles = new Array();
   
   var stage = new Kinetic.Stage({
@@ -36,7 +39,7 @@ $( document ).ready(function() {
 	        y: column,
 	        width: 100,
 	        height: 100,
-	        fill: rectColors[0],
+	        fill: "#E6E6B8",
 	        stroke: 'gray',
 	        strokeWidth: 1
 	      });
@@ -59,10 +62,10 @@ $( document ).ready(function() {
   // Events
   for (var rect=0; rect<9; rect++) {     
   	rectangles[rect].on('click', function() {
-    	changeColor(this);
+    	this.setFill(currentColor);
+    	layer.draw();
 	});
   }  
-	  
                   
   // add the shapes to the layer
   for (var rect=0; rect<9; rect++) {     
@@ -73,23 +76,30 @@ $( document ).ready(function() {
   // add the layer to the stage
   stage.add(layer);
   
+  $('#color1').colorPicker( { onColorChange : function(id, newValue) { 
+  	console.log("ID: " + id + " has been changed to " + newValue);
+  	currentColor = newValue;
+  	} 
+  });
+  
+  
   // This is the only way I could find to access the Kinetic Stage's canvas since the
   // provided layer.getCanvas() method doesn't seem to work in this revision of
   // KineticJS
   var quiltBlock = document.getElementsByTagName('canvas')[0];
   
-  var imageObj1 = new Image();
-  imageObj1.src = "images/aqua_gingham.png"
-  imageObj1.onload = function() {
-    context1.drawImage(imageObj1, 0, 0);
-  };
+//  var imageObj1 = new Image();
+//  imageObj1.src = "images/aqua_gingham.png"
+//  imageObj1.onload = function() {
+//    context1.drawImage(imageObj1, 0, 0);
+//  };
 
-var imageObj2 = new Image();
-  imageObj2.src = "images/feathers.png"
-  imageObj2.onload = function() {
-    context1.drawImage(imageObj2, 10, 10);
+// var imageObj2 = new Image();
+//  imageObj2.src = "images/feathers.png"
+//  imageObj2.onload = function() {
+//    context1.drawImage(imageObj2, 10, 10);
    // context2.drawImage(imageObj2, 10, 10);
-  };
+//  };
   
 $("#quiltIt").click(function(e) {
 	e.preventDefault();
@@ -99,8 +109,6 @@ $("#quiltIt").click(function(e) {
 		  quiltContext.drawImage(quiltBlock, column, row, 100,100);
 	  }
   }
-
-
 });
 
  
