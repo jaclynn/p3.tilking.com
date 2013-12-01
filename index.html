@@ -1,71 +1,63 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-  	<title>Quilt Designer</title>
-  	<meta charset="UTF-8"/>
-  	<!-- css for my grid, simple grid from http://http://simplegrid.info/ -->
-	<link rel="stylesheet" href="css/base.css" type="text/css" media="all">
-	<!--[if lt IE 9 ]><link rel="stylesheet" href="./css/720_grid.css" type="text/css"><![endif]-->
-	<link rel="stylesheet" href="css/720_grid.css" type="text/css" media="screen and (min-width: 720px)">
-	<link rel="stylesheet" href="css/986_grid.css" type="text/css" media="screen and (min-width: 986px)">
-	<link rel="stylesheet" href="css/1236_grid.css" media="screen and (min-width: 1236px)" >
+	<head>
+		<title>Quilt Designer</title>
+	  	<meta charset="UTF-8"/>
+	  	<!-- css for my grid, simple grid from http://http://simplegrid.info/ -->
+		<link rel="stylesheet" href="css/base.css" type="text/css" media="all">
+		<!--[if lt IE 9 ]><link rel="stylesheet" href="./css/720_grid.css" type="text/css"><![endif]-->
+		<link rel="stylesheet" href="css/720_grid.css" type="text/css" media="screen and (min-width: 720px)">
+		<link rel="stylesheet" href="css/986_grid.css" type="text/css" media="screen and (min-width: 986px)">
+		<link rel="stylesheet" href="css/1236_grid.css" media="screen and (min-width: 1236px)" >
 	
-	<!-- my css -->
-    <link rel="stylesheet" type="text/css" href="css/p3.css">
+		<!-- my css -->
+	    <link rel="stylesheet" type="text/css" href="css/p3.css">
     
-    <!-- colorpicker css from http://www.laktek.com/2008/10/27/really-simple-color-picker-in-jquery/ --> 
-  	<link rel="stylesheet" type="text/css" href="css/colorPicker.css"> 
-
-    <script src="js/jquery-1.10.2.min.js"></script>
+	    <!-- colorpicker css from http://www.laktek.com/2008/10/27/really-simple-color-picker-in-jquery/ --> 
+	  	<link rel="stylesheet" type="text/css" href="css/colorPicker.css"> 
+	  	
+	  	<!-- jQuery js -->
+	    <script src="js/jquery-1.10.2.min.js"></script>
     
-    <!-- javascript framework that lets me have clickable shapes in canvas -->
-    <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.7.4.min.js"></script>
+	    <!-- javascript framework that lets me have clickable shapes in canvas -->
+	    <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.7.4.min.js"></script>
     
-    <!-- jQuery js -->
-    <script src="js/jquery.colorPicker.min.js" type="text/javascript"></script>
+	    <!-- colorpicker widget from www.laktek.com -->
+	    <script src="js/jquery.colorPicker.min.js" type="text/javascript"></script>
     
-    <!-- my js -->
-	<script src="js/p3.js"></script>
-  </head>
-  <body>
-  	<header>Quilt Designer by Jackie Wilson</header>
-  	<div class="grid">
-  		<div class="row">
-  			
-			<div class="slot-0-1-2"> 
-				
-				<br/>
-				<p>Choose a 9-patch or 16-patch block to get started. Then choose your first color to start populating the squares. Fill out the block with different colors until you're happy, then click the "Quilt-It!" button</p>
-			
-
-				<br/>
-				
-				<fieldset>
-				<legend>Choose your block grid:</legend>
-				  	<button id="grid9">9-patch</button>
-				  	<button id="grid16">16-patch</button>
-				</fieldset>
-				
-				<br/>
-				<label for="color1">Choose your fabric color:</label>
-				<input id="color1" name="color1" type="text" value="#333399" />
-				<br/>
-				<p>
-				Now click the sections in the block
-				where you'd like that color to appear. You can choose more colors when you're finished:
-				</p>
-			    <div id="container"></div>
-			</div><!-- .slot-0-1-2 -->
-			<div class="slot-3-4-5"> 
-			<br/>
-		    <button id="quiltIt">Quilt It !</button>
-			    <br/>
-				<canvas id="quilt" width="400" height="500" style="border:1px solid #000000;">
-					Your browser does not support the HTML5 canvas tag.
-				</canvas>
-			</div><!-- .slot3-4-5 -->
-		</div><!-- .row -->
-  	</div><!-- .gride -->
-  	<footer>Copyright 2013 Jackie Wilson</footer>
-  </body>
+	    <!-- my js -->
+		<script src="js/p3.js"></script>
+	</head>
+	<body>
+		<header>Quilt Designer by Jackie Wilson</header>
+		<div class="grid">
+	  		<div class="row">
+				<div class="slot-0-1-2"> 
+					<br/>
+					<p>Choose a 9-patch or 16-patch block to get started. Then choose your first color to start populating the squares. Fill out the block with different colors until you're happy, then click the "Quilt-It!" button</p>
+					<br/>
+					<fieldset>
+					<legend>Choose your block grid:</legend>
+					  	<button id="grid9">9-patch</button>
+					  	<button id="grid16">16-patch</button>
+					</fieldset>
+					<br/>
+					<label for="color1">Choose your fabric color:</label>
+					<input id="color1" name="color1" type="text" value="#333399" />
+					<br/>
+					<p>Now click the sections in the block where you'd like that color to appear. You can choose more colors when you're finished:</p>
+				    <div id="container"></div>
+				</div><!-- .slot-0-1-2 -->
+				<div class="slot-3-4-5"> 
+					<br/>
+					<button id="quiltIt">Quilt It !</button>
+					<br/>
+					<canvas id="quilt" width="400" height="500" style="border:1px solid #000000;">
+						Your browser does not support the HTML5 canvas tag.
+					</canvas>
+				</div><!-- .slot3-4-5 -->
+			</div><!-- .row -->
+		</div><!-- .gride -->
+		<footer>Copyright 2013 Jackie Wilson</footer>
+	</body>
 </html>
