@@ -72,7 +72,10 @@ $( document ).ready(function() {
 
 
 		// Events
-		for (var rect=0; rect<size; rect++) {     
+		for (var rect=0; rect<size; rect++) {    
+			rectangles[rect].on('tap', function() {
+				this.setFill(currentColor);
+				layer.draw();
 			rectangles[rect].on('click', function() {
 				this.setFill(currentColor);
 				layer.draw();
