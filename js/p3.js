@@ -114,16 +114,11 @@ $( document ).ready(function() {
 
 		// Events
 		for (var rect=0; rect<size; rect++) { 
-			rectangles[rect].on('tap', function() {
-				this.setFill(currentColor);
-				layer.draw();
-			});//end rectangle event
-			rectangles[rect].on('click', function() {
+			rectangles[rect].on('click tap', function() {
 				if (chosenSwatch=="not chosen"){
 					this.setFill(currentColor);
 					layer.draw();
 				} else {
-					console.log(chosenSwatch);
 					this.setFill(null);//necessary to reset
 					this.setFillPatternImage(kineticSwatches[chosenSwatch]);
 					layer.draw();
@@ -155,6 +150,11 @@ $( document ).ready(function() {
 		loadSwatches();
 		createQuiltBlock(16);
 	});//end grid16 click
+
+	$('#colorpick').click(function(e) {
+		e.preventDefault();
+		chosenSwatch="not chosen";
+	});//end colorpick click
 	
 	$('#color1').colorPicker( { onColorChange : function(id, newValue) { 
 		chosenSwatch = "not chosen";//switches to color
